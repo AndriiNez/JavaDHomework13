@@ -36,7 +36,7 @@ public class NoteController {
     }
 
     @GetMapping("/edit")
-    public ModelAndView showEditForm(@RequestParam(value = "id") Long id) {
+    public ModelAndView showEditForm(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("edit");
         modelAndView.addObject("note", noteService.getById(id));
         return modelAndView;
@@ -44,9 +44,9 @@ public class NoteController {
 
     @PostMapping("/edit")
     public ModelAndView editNote(
-            @RequestParam(value = "id") Long id,
-            @RequestParam(value = "title") String title,
-            @RequestParam(value = "content") String content) {
+            @RequestParam Long id,
+            @RequestParam String title,
+            @RequestParam String content) {
         Note updatedNote = new Note();
         updatedNote.setId(id);
         updatedNote.setTitle(title);
@@ -57,8 +57,7 @@ public class NoteController {
 
 
     @PostMapping("/delete")
-    public ModelAndView update(
-            @RequestParam(value = "id") Long id) {
+    public ModelAndView update(@RequestParam Long id) {
         noteService.deleteById(id);
         return notesList();
     }
